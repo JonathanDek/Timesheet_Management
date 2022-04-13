@@ -1,9 +1,8 @@
 from django.db import models
-
-user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+from django.contrib.auth.models import User
 
 class Doctor(models.Model):
-    ID = models.ForeignKey(user, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     SSN = models.IntegerField()
     Address = models.TextField()
     Phone_Number = models.IntegerField()
