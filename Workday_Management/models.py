@@ -1,25 +1,15 @@
 from enum import auto
 from django.db import models
 
-
+Sector_Choices = [(1,'North'),(2,'East'),(3,'South'), (4,'West')]
 
 class Location(models.Model):
-    North="North"
-    East="East"
-    South="South"
-    West="West"
-    Sector_Choices = [(North,'North'),(East,'East'),(South,'South'), (West,'West')]
     Name = models.CharField(max_length=100)
-    Sector = models.CharField(max_length=5, choices=Sector_Choices)
+    Sector = models.IntegerField(choices=Sector_Choices)
 
 class TimeCard(models.Model):
-    North="North"
-    East="East"
-    South="South"
-    West="West"
-    Sector_Choices = [(North,'North'),(East,'East'),(South,'South'), (West,'West')]
     Date = models.DateField()
-    Sector = models.CharField(max_length=5, choices=Sector_Choices)
-    Location = models.CharField(max_length=1000)
+    location = models.ForeignKey(Location, blank="Fale", null="False", on_delete=models.CASCADE)
     TimeIn = models.TimeField(auto_now = False, auto_now_add = False)
     TimeOut = models.TimeField(auto_now = False, auto_now_add = False)
+    Hours = models.IntegerField()
